@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    OpenStruct.new(email: session[:current_email])
+    User.new(session[:current_email])
   end
   helper_method :current_user
 end
