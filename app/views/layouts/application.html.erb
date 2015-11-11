@@ -7,10 +7,10 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-  <%- if session[:current_email] %>
-    <p class="welcome">Welcome <%= session[:current_email] %></p>
+  <%- if current_user %>
+    <p class="welcome">Welcome <%= current_user.email %></p>
   <% end %>
+
   <%= yield %>
 
 </body>
