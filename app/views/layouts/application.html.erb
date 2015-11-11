@@ -8,7 +8,10 @@
 </head>
 <body>
 
-<%= yield %>
+  <%- if session[:current_email] %>
+    <p class="welcome">Welcome <%= session[:current_email] %></p>
+  <% end %>
+  <%= yield %>
 
 </body>
 </html>
