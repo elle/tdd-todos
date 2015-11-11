@@ -11,8 +11,6 @@ describe User do
 
   context "#todos" do
     it "returns todos whose owner_email match the user's email" do
-      Todo.delete_all
-
       todo1 = create(:todo, owner_email: "joe@example.com")
       todo2 = create(:todo, owner_email: "other@example.com")
 
