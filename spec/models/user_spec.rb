@@ -13,8 +13,8 @@ describe User do
     it "returns todos whose owner_email match the user's email" do
       Todo.delete_all
 
-      todo1 = Todo.create(description: "Buy milk", owner_email: "joe@example.com")
-      todo2 = Todo.create(description: "Buy milk", owner_email: "other@example.com")
+      todo1 = create(:todo, owner_email: "joe@example.com")
+      todo2 = create(:todo, owner_email: "other@example.com")
 
       user = User.new("joe@example.com")
 
