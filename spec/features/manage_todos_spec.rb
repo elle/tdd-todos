@@ -2,9 +2,7 @@ require "rails_helper"
 
 feature "Manage todos" do
   scenario "creates a new todo" do
-    visit root_path
-    fill_in "Email address", with: "joe@example.com"
-    click_on "Sign In"
+    sign_in_as "joe@example.com"
     click_link "Add a new todo"
     fill_in "Description", with: "Buy milk"
     click_button "Create todo"
@@ -15,9 +13,7 @@ feature "Manage todos" do
   scenario "view only my todos" do
     Todo.create(description: "Buy eggs", owner_email: "not_me@example.com")
 
-    visit root_path
-    fill_in "Email address", with: "joe@example.com"
-    click_on "Sign In"
+    sign_in_as "joe@example.com"
     click_link "Add a new todo"
     fill_in 'Description', with: "Buy milk"
     click_button "Create todo"
