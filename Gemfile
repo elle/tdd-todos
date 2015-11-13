@@ -16,6 +16,7 @@ group :development, :test do
   gem "capybara"
   gem "launchy"
   gem "rspec-rails", "3.4.0"
+  gem "shoulda-matchers", "2.8.0", require: false
 end
 
 group :development do
