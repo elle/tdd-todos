@@ -1,1 +1,13 @@
 <p data-role="description">Todos</p>
+
+<%= form_for @todo do |form| %>
+  <%= form.label :description %>
+  <%= form.text_field :description %>
+  <%= form.submit "Create todo" %>
+<% end %>
+
+<ul>
+  <% @todos.each do |todo| %>
+    <li class='todo'><%= todo.description %></li>
+  <% end %>
+</ul>
