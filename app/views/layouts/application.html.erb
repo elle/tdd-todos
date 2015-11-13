@@ -7,7 +7,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <p>Welcome, <%= session[:email] %></p>
+  <p>Welcome, <%= session[:current_email] %></p>
   <% if flash.any? %>
     <% flash.each do |key, value| %>
       <div class="flash-<%=key %>">
