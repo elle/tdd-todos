@@ -6,8 +6,17 @@ class ApplicationController < ActionController::Base
   private
 
   def authenticate
-    if session[:current_email].blank?
+    if current_email.blank?
       redirect_to new_session_path, notice: "Must be logged in"
     end
   end
+
+  def sign_in(email)
+    session[:current_email] = email
+  end
+
+  def current_email
+    session[:current_email]
+  end
+  helper_method :current_email
 end
