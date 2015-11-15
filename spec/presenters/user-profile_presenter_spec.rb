@@ -5,12 +5,6 @@ describe UserProfilePresenter do
 
   it { is_expected.to delegate_method(:full_name).to(:user) }
 
-  it "is initialized" do
-    expect do
-      described_class.new(double, view)
-    end.not_to raise_error
-  end
-
   context "avatar" do
     it "defaults to default avatar" do
       user = double(url: nil, avatar_image_name: nil)
