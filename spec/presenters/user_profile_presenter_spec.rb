@@ -11,29 +11,6 @@ describe UserProfilePresenter do
     expect { subject }.not_to raise_error
   end
 
-  describe "#title" do
-    context "when url is present" do
-      it "links to user" do
-        user = double(url: "abc", full_name: "John")
-        html = "<a href=\"abc\">John</a>"
-
-        presenter = described_class.new(user, view)
-
-        expect(presenter.title).to eq html
-      end
-    end
-
-    context "when url is not present" do
-      it "displays user full_name" do
-        user = double(url: nil, full_name: "John")
-
-        presenter = described_class.new(user, view)
-
-        expect(presenter.title).to eq "John"
-      end
-    end
-  end
-
   describe "#avatar" do
     context "when avatar_image_name exists" do
       context "when url is present" do
@@ -68,6 +45,100 @@ describe UserProfilePresenter do
 
         expect(presenter.avatar).to eq html
       end
+    end
+  end
+  context "#bio" do
+    it "says when none given" do
+      user = double(bio: nil)
+      presenter = described_class.new(user, view)
+      html = '<span class="none">None given</span>'
+
+      expect(presenter.bio).to eq html
+    end
+
+    it "parses markdown" do
+      user = double(bio: "abc")
+      presenter = described_class.new(user, view)
+      html = "<p>abc</p>\n"
+
+      expect(presenter.bio).to eq html
+    end
+  end
+
+  context "#github" do
+    it "says when none given" do
+      user = double(github_name: nil)
+      presenter = described_class.new(user, view)
+      html = '<span class="none">None given</span>'
+
+      expect(presenter.github).to eq html
+    end
+
+    it "links to github page" do
+      user = double(github_name: "abc")
+      presenter = described_class.new(user, view)
+      html = '<a href="http://github.com/abc">abc</a>'
+
+      expect(presenter.github).to eq html
+    end
+  end
+
+  describe "#title" do
+    context "when url is present" do
+      it "links to user" do
+        user = double(url: "abc", full_name: "John")
+        html = "<a href=\"abc\">John</a>"
+
+        presenter = described_class.new(user, view)
+
+        expect(presenter.title).to eq html
+      end
+    end
+
+    context "when url is not present" do
+      it "displays user full_name" do
+        user = double(url: nil, full_name: "John")
+
+        presenter = described_class.new(user, view)
+
+        expect(presenter.title).to eq "John"
+      end
+    end
+  end
+
+  context "#twitter" do
+    it "says when none given" do
+      user = double(twitter_name: nil)
+      presenter = described_class.new(user, view)
+      html = '<span class="none">None given</span>'
+
+      expect(presenter.twitter).to eq html
+    end
+
+    it "links to twitter page" do
+      user = double(twitter_name: "abc")
+      presenter = described_class.new(user, view)
+      html = '<a href="http://twitter.com/abc">abc</a>'
+
+      expect(presenter.twitter).to eq html
+    end
+  end
+
+  context "#website" do
+    it "says when none given" do
+      user = double(url: nil)
+      presenter = described_class.new(user, view)
+      html = '<span class="none">None given</span>'
+
+      expect(presenter.website).to eq html
+    end
+
+    it "links to website" do
+      user = double(url: "example.com")
+      presenter = described_class.new(user, view)
+      html = '<a href="example.com">example.com</a>'
+
+      expect(presenter.website).to eq html
     end
   end
 end
