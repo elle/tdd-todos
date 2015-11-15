@@ -1,0 +1,41 @@
+<article id="profile">
+  <h1><%= link_to_if @user.url.present?, @user.full_name, @user.url %></h1>
+  <header>
+    <%= link_to_if @user.url.present?, image_tag("avatars/#{avatar_name(@user)}", class: "avatar"), @user.url %>
+    <ul>
+      <li>Member Since: <%= @user.member_since %></li>
+      <li>Website:
+      <% if @user.url.present? %>
+        <%= link_to @user.url, @user.url %>
+      <% else %>
+        <span class="none">None given</span>
+      <% end %>
+      </li>
+      <li>Github:
+      <% if @user.github_name.present? %>
+        <%= link_to @user.github_name, "http://github.com/#{@user.github_name}" %>
+      <% else %>
+        <span class="none">None given</span>
+      <% end %>
+      </li>
+      <li>Twitter:
+      <% if @user.twitter_name.present? %>
+        <%= link_to @user.twitter_name, "http://twitter.com/#{@user.twitter_name}" %>
+      <% else %>
+        <span class="none">None given</span>
+      <% end %>
+      </li>
+    </ul>
+  </header>
+  <content class="bio">
+    <h2>Bio</h2>
+    <p>
+      <% if @user.bio.present? %>
+        <% markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, auto_link: true) %>
+        <%=raw markdown.render(@user.bio) %>
+      <% else %>
+        <span class="none">None given</span>
+      <% end %>
+      </p>
+  </content>
+</article>

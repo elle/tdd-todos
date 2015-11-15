@@ -1,0 +1,55 @@
+$san-juan: #455A5C;
+
+#profile {
+  width: 40em;
+
+  h1, h2 {
+    color: $san-juan;
+    font-family: monospace;
+    font-size: 3.6rem;
+    margin-bottom: 1rem;
+  }
+
+  h2 {
+    font-size: 2.4rem;
+  }
+
+  a {
+    color: $san-juan;
+    text-decoration: none;
+  }
+
+  p {
+    line-height: 1.5;
+  }
+
+  header {
+    background: $san-juan;
+    color: #fff;
+    padding: 7px;
+
+    a {
+      color: #fff;
+    }
+  }
+
+  .avatar {
+    border: 4px solid #eee;
+    display: inline-block;
+    margin-right: 10px;
+    width: auto;
+  }
+
+  ul {
+    display: inline-block;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    vertical-align: top;
+    width: 50%;
+
+    li {
+      margin-bottom: 5px;
+    }
+  }
+}
