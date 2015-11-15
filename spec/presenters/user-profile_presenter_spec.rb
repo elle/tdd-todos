@@ -11,6 +11,49 @@ describe UserProfilePresenter do
     end.not_to raise_error
   end
 
+  context "avatar" do
+    it "defaults to default avatar" do
+      user = double(url: nil, avatar_image_name: nil)
+      presenter = described_class.new(user, view)
+
+      expect(presenter.avatar).to include "default.png"
+    end
+
+    it "displays avatar" do
+      user = double(url: nil, avatar_image_name: "abc.png")
+      presenter = described_class.new(user, view)
+
+      expect(presenter.avatar).to include "abc.png"
+    end
+
+    context "with url" do
+      it "links to website" do
+        user = double(url: "example.com", avatar_image_name: "abc.png")
+        presenter = described_class.new(user, view)
+
+        expect(presenter.avatar).to include "example.com"
+      end
+    end
+  end
+
+  context "#bio" do
+    it "says when none given" do
+      user = double(bio: nil)
+      presenter = described_class.new(user, view)
+      html = '<span class="none">None given</span>'
+
+      expect(presenter.bio).to eq html
+    end
+
+    it "parses markdown" do
+      user = double(bio: "abc")
+      presenter = described_class.new(user, view)
+      html = "abc"
+
+      expect(presenter.bio).to eq html
+    end
+  end
+
   context "#github" do
     it "says when none given" do
       user = double(github_name: nil)
@@ -57,6 +100,42 @@ describe UserProfilePresenter do
       presenter = described_class.new(user, view)
 
       expect(presenter.member_since).to eq time.strftime("%B %e, %Y")
+    end
+  end
+
+  context "#twitter" do
+    it "says when none given" do
+      user = double(twitter_name: nil)
+      presenter = described_class.new(user, view)
+      html = '<span class="none">None given</span>'
+
+      expect(presenter.twitter).to eq html
+    end
+
+    it "links to twitter page" do
+      user = double(twitter_name: "abc")
+      presenter = described_class.new(user, view)
+      html = '<a href="http://twitter.com/abc">abc</a>'
+
+      expect(presenter.twitter).to eq html
+    end
+  end
+
+  context "#website" do
+    it "says when none given" do
+      user = double(url: nil)
+      presenter = described_class.new(user, view)
+      html = '<span class="none">None given</span>'
+
+      expect(presenter.website).to eq html
+    end
+
+    it "links to website" do
+      user = double(url: "example.com")
+      presenter = described_class.new(user, view)
+      html = '<a href="example.com">example.com</a>'
+
+      expect(presenter.website).to eq html
     end
   end
 end
