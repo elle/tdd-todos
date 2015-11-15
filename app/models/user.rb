@@ -4,8 +4,4 @@ class User < ActiveRecord::Base
   def full_name
     [first_name, last_name].compact.join(" ").titleize
   end
-
-  def member_since
-    created_at.strftime("%B %e, %Y")
-  end
 end
