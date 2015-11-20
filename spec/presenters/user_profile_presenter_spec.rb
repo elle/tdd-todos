@@ -5,12 +5,6 @@ describe UserProfilePresenter do
 
   it { should delegate_method(:full_name).to(:user) }
 
-  it "can be initialized" do
-    user = double
-
-    expect { subject }.not_to raise_error
-  end
-
   describe "#avatar" do
     context "when avatar_image_name exists" do
       context "when url is present" do

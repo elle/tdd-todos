@@ -17,18 +17,14 @@ class UserProfilePresenter
   end
 
   def bio
-    if user.bio
+    handle_none user.bio do
       markdown.render(user.bio)
-    else
-      h.content_tag :span, "None given", class: "none"
     end
   end
 
   def github
-    if user.github_name
+    handle_none user.github_name do
       h.link_to user.github_name, "http://github.com/#{user.github_name}"
-    else
-      h.content_tag :span, "None given", class: "none"
     end
   end
 
@@ -41,18 +37,14 @@ class UserProfilePresenter
   end
 
   def twitter
-    if user.twitter_name
+    handle_none user.twitter_name do
       h.link_to user.twitter_name, "http://twitter.com/#{user.twitter_name}"
-    else
-      h.content_tag :span, "None given", class: "none"
     end
   end
 
   def website
-    if user.url
+    handle_none user.url do
       h.link_to user.url, user.url
-    else
-      h.content_tag :span, "None given", class: "none"
     end
   end
 
@@ -77,4 +69,21 @@ class UserProfilePresenter
   def markdown
     Redcarpet::Markdown.new(Redcarpet::Render::HTML, auto_link: true)
   end
+
+  def handle_none(value)
+    if value.present?
+      yield
+    else
+      h.content_tag :span, "None given", class: "none"
+    end
+  end
 end
+
+
+
+
+
+
+
+
+
