@@ -48,6 +48,10 @@ class UserProfilePresenter
     end
   end
 
+  def member_since
+    user.created_at.strftime("%B %e, %Y")
+  end
+
   private
 
   def h

@@ -6,6 +6,6 @@ feature "views user profile" do
     visit user_path(user)
 
     expect(page).to have_content user.first_name
-    expect(page).to have_selector "img[src='/assets/avatars/default.png']"
+    expect(page).to have_selector "img[src='/images/default.png']"
   end
 end

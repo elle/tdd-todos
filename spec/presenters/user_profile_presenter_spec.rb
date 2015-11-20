@@ -135,4 +135,22 @@ describe UserProfilePresenter do
       expect(presenter.website).to eq html
     end
   end
+
+  describe "#member_since" do
+    it "displays formatted created_at" do
+      time = Time.current
+      user = double(created_at: time)
+
+      presenter = described_class.new(user, view)
+
+      expect(presenter.member_since).to eq time.strftime("%B %e, %Y")
+    end
+  end
 end
+
+
+
+
+
+
+
