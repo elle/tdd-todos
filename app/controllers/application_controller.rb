@@ -19,4 +19,11 @@ class ApplicationController < ActionController::Base
     session[:current_email]
   end
   helper_method :current_email
+
+  def twilio_client
+    @twilio_client ||= ENV["SMS_CLASS"].constantize.new(
+      ENV.fetch("TWILIO_ACCOUNT_ID"),
+      ENV.fetch("TWILIO_ACCOUNT_TOKEN"),
+    )
+  end
 end

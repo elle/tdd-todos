@@ -10,6 +10,11 @@ class TodosController < ApplicationController
     @todo = Todo.new(todo_params)
 
     if @todo.save
+      twilio_client.messages.create(
+        body: todo_params[:description],
+        to: "+13025306878",
+        from: ENV.fetch("TWILIO_FROM_NUMBER"),
+      )
       flash[:info] = "You've created a todo successfully"
       redirect_to root_path
     else
